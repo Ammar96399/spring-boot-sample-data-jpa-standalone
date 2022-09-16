@@ -7,5 +7,12 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface CityDao extends JpaRepository<City, Long> {
-    public City
+    City findCityById(Long id);
+
+    City findCityByName(String name);
+
+    void saveCity(City city);
+
+    void deleteCityById(Long id);
+
 }
