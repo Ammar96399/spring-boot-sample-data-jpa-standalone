@@ -12,7 +12,5 @@ public interface HotelDao extends JpaRepository<Hotel, Long> {
 
     Hotel findHotelByName(String name);
 
-    void saveHotel(Hotel hotel);
-
     void deleteHotelById(Long id);
 }

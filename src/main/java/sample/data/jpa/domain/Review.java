@@ -1,8 +1,13 @@
 package sample.data.jpa.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "review")
 public class Review {

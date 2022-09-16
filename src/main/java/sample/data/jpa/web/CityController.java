@@ -20,13 +20,13 @@ public class CityController {
     public String create(City city) {
         String cityId = "";
         try {
-            cityDao.saveCity(city);
+            cityDao.save(city);
             cityId = String.valueOf(city.getId());
         } catch (Exception ex) {
             return "Error creating the city: " + ex.toString();
         }
 
-        return "User successfully created with id = " + cityId;
+        return "City successfully created with id = " + cityId;
     }
 
     @RequestMapping("/delete")
@@ -35,9 +35,9 @@ public class CityController {
         try {
             cityDao.deleteCityById(id);
         } catch (Exception ex) {
-            return "Error deleting the user: " + ex;
+            return "Error deleting the city: " + ex;
         }
-        return "User successfully deleted!";
+        return "City successfully deleted!";
     }
 
     @RequestMapping("{id}")

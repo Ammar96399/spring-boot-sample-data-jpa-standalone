@@ -1,8 +1,13 @@
 package sample.data.jpa.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "hotel")
 public class Hotel {

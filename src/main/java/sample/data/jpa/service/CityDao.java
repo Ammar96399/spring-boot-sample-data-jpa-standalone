@@ -11,8 +11,6 @@ public interface CityDao extends JpaRepository<City, Long> {
 
     City findCityByName(String name);
 
-    void saveCity(City city);
-
     void deleteCityById(Long id);
 
 }
