@@ -45,7 +45,7 @@ public class ReviewController {
     public String getById(@PathVariable("id") Long id) {
         String reviewId = "";
         try {
-            Review review = reviewDao.findReviewByIdx(id);
+            Review review = reviewDao.findReviewById(id);
             reviewId = String.valueOf(review.getId());
         } catch (Exception ex) {
             return "City not found";

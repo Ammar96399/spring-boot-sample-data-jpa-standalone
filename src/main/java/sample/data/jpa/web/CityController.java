@@ -1,10 +1,10 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.City;
 import sample.data.jpa.service.CityDao;
 
@@ -15,18 +15,15 @@ public class CityController {
     @Autowired
     private CityDao cityDao;
 
-    @RequestMapping("/create")
-    @ResponseBody
-    public String create(City city) {
+    @PostMapping(value = "/create")
+    public ResponseEntity create(  City city) {
+
+        System.out.println(city.getCountry());
         String cityId = "";
-        try {
             cityDao.save(city);
             cityId = String.valueOf(city.getId());
-        } catch (Exception ex) {
-            return "Error creating the city: " + ex.toString();
-        }
 
-        return "City successfully created with id = " + cityId;
+        return ResponseEntity.ok(city);
     }
 
     @RequestMapping("/delete")
@@ -42,15 +39,13 @@ public class CityController {
 
     @RequestMapping("{id}")
     @ResponseBody
-    public String getById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         String cityId = "";
         try {
-            City city = cityDao.findCityById(id);
-            cityId = String.valueOf(city.getId());
+            return new ResponseEntity(cityDao.findCityById(id), HttpStatus.OK);
         } catch (Exception ex) {
-            return "City not found";
+            return new ResponseEntity("City not found", HttpStatus.BAD_REQUEST);
         }
-        return "The city id is: " + cityId;
     }
 }
 
