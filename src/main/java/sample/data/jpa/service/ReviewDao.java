@@ -10,7 +10,7 @@ import java.util.Optional;
 @Transactional
 public interface ReviewDao extends JpaRepository<Review, Long> {
 
-    public Review findReviewById(Long id);
+    Review findReviewById(Long id);
 
     Hotel findReviewByTitle(String title);
 

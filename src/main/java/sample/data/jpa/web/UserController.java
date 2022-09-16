@@ -33,7 +33,7 @@ public class UserController {
   /**
    * GET /delete  --> Delete the user having the passed id.
    */
-  @RequestMapping("/delete")
+  @RequestMapping("{id}/delete")
   @ResponseBody
   public String delete(long id) {
     try {

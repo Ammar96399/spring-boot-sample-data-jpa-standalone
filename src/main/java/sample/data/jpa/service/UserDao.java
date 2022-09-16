@@ -15,6 +15,6 @@ public interface UserDao extends JpaRepository<User, Long> {
    * Note that this method is not implemented and its working code will be
    * automagically generated from its signature by Spring Data JPA.
    */
-  public User findByEmail(String email);
+  User findByEmail(String email);
 
 }

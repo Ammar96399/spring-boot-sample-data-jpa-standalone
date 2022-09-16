@@ -3,6 +3,7 @@ package sample.data.jpa.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sample.data.jpa.domain.Hotel;
@@ -15,7 +16,7 @@ public class HotelController {
     @Autowired
     private HotelDao hotelDao;
 
-    @RequestMapping("/create")
+    @PostMapping("/create")
     @ResponseBody
     public String create(Hotel hotel) {
         String hotelId = "";
@@ -29,7 +30,7 @@ public class HotelController {
         return "Hotel successfully created with id = " + hotelId;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("{id}/delete")
     @ResponseBody
     public String delete(Long id) {
         try {

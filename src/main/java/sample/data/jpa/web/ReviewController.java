@@ -29,7 +29,7 @@ public class ReviewController {
         return "Review successfully created with id = " + reviewId;
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("{id}/delete")
     @ResponseBody
     public String delete(Long id) {
         try {
