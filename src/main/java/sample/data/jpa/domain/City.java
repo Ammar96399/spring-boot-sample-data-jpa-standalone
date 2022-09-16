@@ -1,8 +1,14 @@
 package sample.data.jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "city")
 public class City {
