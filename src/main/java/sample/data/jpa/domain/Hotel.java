@@ -9,7 +9,7 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "hotel_id")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "city_id")

@@ -9,7 +9,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idx")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "hotel_id")
