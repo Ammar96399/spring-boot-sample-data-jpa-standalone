@@ -16,7 +16,7 @@ public class CityController {
     private CityDao cityDao;
 
     @PostMapping(value = "/create")
-    public ResponseEntity create(  City city) {
+    public ResponseEntity create(@RequestBody City city) {
 
         System.out.println(city.getCountry());
         String cityId = "";
