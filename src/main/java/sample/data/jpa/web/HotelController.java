@@ -1,13 +1,15 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Hotel;
 import sample.data.jpa.service.HotelDao;
+
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/hotel")
@@ -18,40 +20,40 @@ public class HotelController {
 
     @PostMapping("/create")
     @ResponseBody
-    public String create(Hotel hotel) {
-        String hotelId = "";
-        try {
+    public ResponseEntity<?> create(@RequestBody Hotel hotel) {
+        if (Objects.nonNull(hotel)) {
             hotelDao.save(hotel);
-            hotelId = String.valueOf(hotel.getId());
-        } catch (Exception ex) {
-            return "Error creating the hotel: " + ex.toString();
+            var headers = new HttpHeaders();
+            headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "X-Custom-ID");
+            headers.add("X-Custom-ID", String.valueOf(hotel.getId()));
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return ResponseEntity.ok().headers(headers).body(hotel);
+        } else {
+            return ResponseEntity.badRequest().body("Cannot add hotel to the DB - operation failed");
         }
-
-        return "Hotel successfully created with id = " + hotelId;
     }
 
     @RequestMapping("{id}/delete")
     @ResponseBody
-    public String delete(Long id) {
-        try {
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+        var hotel = hotelDao.findById(id);
+        if (hotel.isPresent()) {
             hotelDao.deleteHotelById(id);
-        } catch (Exception ex) {
-            return "Error deleting the hotel: " + ex;
+            return ResponseEntity.ok("Hotel successfully deleted!");
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return "Hotel successfully deleted!";
     }
 
     @RequestMapping("{id}")
     @ResponseBody
-    public String getById(@PathVariable("id") Long id) {
-        String hotelId = "";
-        try {
-            Hotel hotel = hotelDao.findHotelById(id);
-            hotelId = String.valueOf(hotel.getId());
-        } catch (Exception ex) {
-            return "Hotel not found";
+    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
+        var hotel = hotelDao.findById(id);
+        if (hotel.isPresent()) {
+            return ResponseEntity.ok(hotel.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return "The hotel id is: " + hotelId;
     }
 }
 
