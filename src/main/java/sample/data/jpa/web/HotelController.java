@@ -66,6 +66,18 @@ public class HotelController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/delete/{name}")
+    @ResponseBody
+    public ResponseEntity<String> delete(@PathVariable String name) {
+        var hotel = hotelDao.findHotelByName(name);
+        if (hotel != null) {
+            hotelDao.deleteHotelByName(name);
+            return ResponseEntity.ok("Hotel successfully deleted!");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
 

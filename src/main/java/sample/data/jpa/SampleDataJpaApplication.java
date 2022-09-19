@@ -34,7 +34,7 @@ public class SampleDataJpaApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry res) {
-				res.addMapping("/**").allowedOrigins("*");
+				res.addMapping("/**").allowedOrigins("*").allowedHeaders("GET", "POST", "DELETE").allowedHeaders("Authorization", "Cache-Control", "Content-Type");
 			}
 		};
 	}
