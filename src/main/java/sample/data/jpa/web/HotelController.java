@@ -55,6 +55,17 @@ public class HotelController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @RequestMapping("/")
+    @ResponseBody
+    public ResponseEntity<?> getAllHotel() {
+        var hotels = hotelDao.findAll();
+        if (!hotels.isEmpty()) {
+            return ResponseEntity.ok(hotels);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
 
