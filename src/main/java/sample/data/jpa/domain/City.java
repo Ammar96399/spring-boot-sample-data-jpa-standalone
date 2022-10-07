@@ -2,7 +2,10 @@ package sample.data.jpa.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +16,9 @@ public class City {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "city_id")
     private Long id;
+
+    @OneToMany(mappedBy = "city")
+    private List<Hotel> hotels;
 
 //    @JsonProperty(value="country")
     private String country;

@@ -15,8 +15,11 @@ public class Review {
     @Column(name = "idx")
     private Long id;
 
-    @Column(name = "hotel_id")
-    private Integer hotel;
+    @ManyToOne
+    private Hotel hotel;
+
+    @ManyToOne
+    private User user;
 
     @Column(name = "check_in_date")
     private String checkInDate;

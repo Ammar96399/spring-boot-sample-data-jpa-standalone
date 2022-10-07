@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,12 +16,15 @@ public class Hotel {
     @Column(name = "hotel_id")
     private Long id;
 
-    @Column(name = "city_id")
-    private Integer city;
+    @ManyToOne
+    private City city;
 
     private String name;
 
     private String address;
 
     private String zip;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Review> reviews;
 }
