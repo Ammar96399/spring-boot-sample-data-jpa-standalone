@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Table(name = "review")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idx")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
     private Long id;
 
     @ManyToOne
